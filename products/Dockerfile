@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM openjdk:22-oraclelinux8
 
 WORKDIR /app
 

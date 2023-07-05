@@ -14,7 +14,7 @@
     <name>users</name>
     <description>users </description>
     <properties>
-        <java.version>20</java.version>
+        <java.version>17</java.version>
         <testcontainers.version>1.18.3</testcontainers.version>
     </properties>
     <dependencies>
@@ -84,6 +84,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.5.2</version>
             </plugin>
         </plugins>
     </build>
