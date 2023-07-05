@@ -12,7 +12,13 @@ services:
       - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
     volumes:
       - db:/var/lib/mysql
-  app:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    links:
+      - mysqldb:db
+    ports:
+      - "8081:80"
+  users:
     depends_on:
       - mysqldb
     build: ./users
@@ -21,15 +27,27 @@ services:
     ports:
       - ${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}
     environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:mysql://mysqldb:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}?useSSL=false",
-        "spring.datasource.username" : "${MYSQLDB_USER}",
-        "spring.datasource.password" : "${MYSQLDB_ROOT_PASSWORD}",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"
-      }'
-    volumes:
-      - .m2:/root/.m2
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}?useSSL=false
+      - SPRING_DATASOURCE_USERNAME=${MYSQLDB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQLDB_ROOT_PASSWORD}
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DDL_AUTO=update
+    stdin_open: true
+    tty: true
+  products:
+    depends_on:
+      - mysqldb
+    build: ./products
+    restart: on-failure
+    env_file: .env
+    ports:
+      - ${SPRING_LOCAL_PORT_2}:${SPRING_DOCKER_PORT}
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}?useSSL=false
+      - SPRING_DATASOURCE_USERNAME=${MYSQLDB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQLDB_ROOT_PASSWORD}
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DDL_AUTO=update
     stdin_open: true
     tty: true
 
