@@ -1,39 +1,37 @@
 
 ### Clone repository
 ```bash
-git clone git@github.com:AndriyKalashnykov/spring-microservices-k8s.git
+git clone git@github.com:eslamelshenawy/microservices.git
 ```
 ## minikube start 
 ```bash
 minikube start
 ```
-## minikube dashboard
+## minikube stop
 ```bash
 minikube stop
 ```
-### Start Kubernetes cluster
+### build Image
 
 ```bash
 docker build -t eslamelshenawy/user:1.1 .
 ```
 
-### Configure Kubernetes cluster
+### push Image
 
 ```bash
 
 docker push eslamelshenawy/user:1.1 
 ```
 
-### Deploy application to Kubernetes cluster
+### build Image
 
 ```bash
 
 docker build -t eslamelshenawy/products:1.1 .
 ```
 
-### Polulate test data
-
-```bash
+```push Image
 
 docker push eslamelshenawy/products:1.1
 ```
@@ -41,19 +39,19 @@ docker push eslamelshenawy/products:1.1
 ```bash
 minikube dashboard
 ```
-### Observe Employee service logs
+### get pods --all-namespaces
 
 ```bash
 kubectl get pods --all-namespaces
 ```
 
-### Open Swagger UI web interface
+### 
 
 ```bash
 kubectl apply -f user-service.yaml 
 ```
 
-### Undeploy application from Kubernetes cluster
+### deploy cluster
 
 ```bash
 kubectl apply -f product-service.yaml
