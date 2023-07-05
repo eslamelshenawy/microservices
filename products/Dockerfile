@@ -1,7 +1,6 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM openjdk:22-oraclelinux8
 
-WORKDIR /app
-
-COPY target/products-1.1.jar /app
+COPY target/products-1.1.jar /products/app/
+WORKDIR /products/app
 
 ENTRYPOINT ["java", "-jar", "products-1.1.jar"]
