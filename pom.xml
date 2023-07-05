@@ -22,21 +22,4 @@
 		<module>users</module>
 		<module>products</module>
 	</modules>
-	<dependencies>
-		<dependency>
-			<groupId>nl.tritales.springrestdoc</groupId>
-			<artifactId>springrestdoc</artifactId>
-			<version>0.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>nl.tritales.springrestdoc</groupId>
-			<artifactId>springrestdoc</artifactId>
-			<version>0.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>nl.tritales.springrestdoc</groupId>
-			<artifactId>springrestdoc</artifactId>
-			<version>0.1.0</version>
-		</dependency>
-	</dependencies>
 </project>
